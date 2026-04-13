@@ -1,0 +1,43 @@
+# MAPPO hyperparameters — Stage 1 curriculum
+algorithm: "mappo"
+stage: 1
+
+# --- Network ---
+hidden_dim: 256
+n_layers: 2
+use_rnn: false
+activation: "relu"
+
+# --- PPO ---
+lr: 3.0e-4
+gamma: 0.99
+gae_lambda: 0.95
+eps_clip: 0.2
+epochs_per_update: 10
+entropy_coef: 0.01
+value_loss_coef: 0.5
+max_grad_norm: 0.5
+
+# --- Rollout ---
+n_envs: 32
+batch_size: 3200         # steps collected before each update
+episode_limit: 200       # max steps per episode (stage 1)
+
+# --- Training ---
+t_max: 300000            # total env steps for stage 1
+eval_interval: 10000
+eval_episodes: 20
+log_interval: 2000
+
+# --- Action space ---
+grid_size: 8             # 8x8 target grid → 320 discrete actions
+
+# --- Misc ---
+seed: 42
+use_cuda: true
+save_model: true
+save_interval: 50000
+checkpoint_dir: "checkpoints"
+use_tensorboard: true
+tb_log_dir: "tb_logs"
+common_reward: true
