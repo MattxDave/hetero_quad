@@ -16,7 +16,7 @@ class Target:
     y: float
     revealed: bool = False
     interacted: bool = False
-    revealed_by: str | None = None  # agent id that first revealed this target
+    revealed_by: str | None = None  # agent id that first revealed this target (measurement only)
 
 
 class TaskManager:
@@ -42,34 +42,26 @@ class TaskManager:
             self.targets.append(Target(x=x, y=y))
         return self.targets
 
-    def update_reveals(self, positions: dict[str, tuple[float, float]]) -> dict[str, int]:
-        """Return per-agent reveal counts {agent_id: n_revealed_this_step}."""
-        counts: dict[str, int] = {}
+    def update_reveals(self, positions: dict[str, tuple[float, float]]) -> int:
+        new_reveals = 0
         for target in self.targets:
             if target.revealed:
                 continue
             for agent, (x, y) in positions.items():
-                if np.hypot(x - target.x, y - target.y) <= 3.6:
+                if np.hypot(x - target.x, y - target.y) <= 2.0:
                     target.revealed = True
                     target.revealed_by = agent
-                    counts[agent] = counts.get(agent, 0) + 1
+                    new_reveals += 1
                     break
-        return counts
+        return new_reveals
 
     def try_interactions(
         self,
         action_types: dict[str, ActionType],
         states: dict[str, RobotState],
         capabilities: dict[str, CapabilityProfile],
-        interaction_range: float = 3.6,
-    ) -> tuple[int, int]:
-        """Return (total_new_interactions, handoff_interactions).
-
-        A handoff interaction is one where Ghost revealed the target and Spot
-        subsequently interacted it — the intended coordination pattern.
-        """
+    ) -> int:
         new_interactions = 0
-        handoff_interactions = 0
         for agent, action_type in action_types.items():
             capability = capabilities[agent]
             if action_type != ActionType.INTERACT or not capability.has_arm:
@@ -78,26 +70,20 @@ class TaskManager:
             for target in self.targets:
                 if target.interacted or not target.revealed:
                     continue
-                if np.hypot(sx - target.x, sy - target.y) <= interaction_range:
+                if np.hypot(sx - target.x, sy - target.y) <= 0.5:
                     target.interacted = True
                     new_interactions += 1
-                    if target.revealed_by == "ghost":
-                        handoff_interactions += 1
                     break
-        return new_interactions, handoff_interactions
+        return new_interactions
 
     def all_interacted(self) -> bool:
         return all(target.interacted for target in self.targets)
 
-    def flattened_target_obs(self, agent_x: float = 0.0, agent_y: float = 0.0) -> np.ndarray:
-        """Return per-target (dx, dy, state) relative to the observing agent."""
+    def flattened_target_obs(self) -> np.ndarray:
         flat: list[float] = []
         for target in self.targets:
-            if target.interacted:
-                state = 1.0
-            elif target.revealed:
-                state = 0.5
+            if target.revealed:
+                flat.extend([target.x, target.y, 1.0 if target.interacted else 0.0])
             else:
-                state = 0.0
-            flat.extend([target.x - agent_x, target.y - agent_y, state])
+                flat.extend([0.0, 0.0, 0.0])
         return np.asarray(flat, dtype=np.float32)

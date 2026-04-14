@@ -80,7 +80,7 @@ class MetricsTracker:
                     if bearing_len > 1e-9:
                         bearing_dir = bearing / bearing_len
                         vel_dir = np.array([gvx, gvy], dtype=np.float64) / speed
-                        if float(np.dot(vel_dir, bearing_dir)) > 0.707:
+                        if float(np.dot(vel_dir, bearing_dir)) > 0.5:
                             self._ghost_toward_unrevealed += 1
 
         ghost_scout = (
