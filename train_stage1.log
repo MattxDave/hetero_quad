@@ -1,0 +1,357 @@
+MAPPO training — stage 1, t_max=3000000, n_actions=35, device=cuda
+[step    3200] pg=-0.0533  vf=27.5098  ent=3.4229  sps=856  ep_ret=178.4  scout_ghost=0.087  interact_spot=0.037
+[step    6400] pg=-0.0411  vf=42.3902  ent=3.4125  sps=908  ep_ret=259.4  scout_ghost=0.071  interact_spot=0.048
+[step    9600] pg=-0.0492  vf=23.7816  ent=3.4040  sps=935  ep_ret=188.7  scout_ghost=0.053  interact_spot=0.047
+[step   12800] pg=-0.0407  vf=32.9242  ent=3.3989  sps=947  ep_ret=248.7  scout_ghost=0.082  interact_spot=0.047
+  [eval] return=124.3±168.1  win_rate=0.10  scout_ghost=0.022  interact_spot=0.011
+  [best] win_rate=0.10 → checkpoints/mappo_stage1_step12800.pt
+[step   16000] pg=-0.0451  vf=39.5211  ent=3.3919  sps=857  ep_ret=263.3  scout_ghost=0.093  interact_spot=0.031
+[step   19200] pg=-0.0468  vf=29.9978  ent=3.3827  sps=877  ep_ret=244.7  scout_ghost=0.089  interact_spot=0.042
+[step   22400] pg=-0.0516  vf=39.9730  ent=3.3722  sps=889  ep_ret=298.3  scout_ghost=0.077  interact_spot=0.030
+  [eval] return=417.3±278.2  win_rate=0.65  scout_ghost=0.058  interact_spot=0.022
+  [best] win_rate=0.65 → checkpoints/mappo_stage1_step22400.pt
+[step   25600] pg=-0.0480  vf=30.4422  ent=3.3638  sps=873  ep_ret=288.5  scout_ghost=0.070  interact_spot=0.035
+[step   28800] pg=-0.0484  vf=24.0871  ent=3.3754  sps=885  ep_ret=202.2  scout_ghost=0.102  interact_spot=0.051
+[step   32000] pg=-0.0384  vf=31.3610  ent=3.3580  sps=895  ep_ret=322.5  scout_ghost=0.067  interact_spot=0.054
+  [eval] return=197.1±247.8  win_rate=0.25  scout_ghost=0.121  interact_spot=0.065
+[step   35200] pg=-0.0426  vf=29.8649  ent=3.3618  sps=865  ep_ret=284.2  scout_ghost=0.090  interact_spot=0.047
+[step   38400] pg=-0.0479  vf=34.1281  ent=3.3559  sps=875  ep_ret=354.3  scout_ghost=0.091  interact_spot=0.032
+[step   41600] pg=-0.0511  vf=35.5007  ent=3.3502  sps=882  ep_ret=361.7  scout_ghost=0.075  interact_spot=0.030
+  [eval] return=263.2±294.4  win_rate=0.40  scout_ghost=0.044  interact_spot=0.025
+[step   44800] pg=-0.0414  vf=31.4718  ent=3.3386  sps=867  ep_ret=299.1  scout_ghost=0.081  interact_spot=0.055
+[step   48000] pg=-0.0484  vf=31.8458  ent=3.3382  sps=875  ep_ret=311.3  scout_ghost=0.085  interact_spot=0.037
+[step   51200] pg=-0.0564  vf=44.8524  ent=3.3196  sps=882  ep_ret=443.2  scout_ghost=0.068  interact_spot=0.054
+  [eval] return=241.5±248.8  win_rate=0.30  scout_ghost=0.041  interact_spot=0.060
+  [saved] checkpoints/mappo_stage1_step51200.pt
+[step   54400] pg=-0.0453  vf=28.6369  ent=3.3299  sps=866  ep_ret=361.9  scout_ghost=0.066  interact_spot=0.052
+[step   57600] pg=-0.0376  vf=38.9101  ent=3.3105  sps=872  ep_ret=419.8  scout_ghost=0.084  interact_spot=0.056
+[step   60800] pg=-0.0459  vf=30.9849  ent=3.3145  sps=878  ep_ret=398.0  scout_ghost=0.082  interact_spot=0.048
+  [eval] return=339.8±282.4  win_rate=0.50  scout_ghost=0.053  interact_spot=0.036
+[step   64000] pg=-0.0497  vf=25.9455  ent=3.3145  sps=869  ep_ret=363.9  scout_ghost=0.109  interact_spot=0.041
+[step   67200] pg=-0.0477  vf=23.5991  ent=3.3041  sps=874  ep_ret=363.3  scout_ghost=0.088  interact_spot=0.025
+[step   70400] pg=-0.0476  vf=16.8580  ent=3.2999  sps=879  ep_ret=286.9  scout_ghost=0.106  interact_spot=0.035
+  [eval] return=331.4±291.4  win_rate=0.50  scout_ghost=0.119  interact_spot=0.013
+[step   73600] pg=-0.0476  vf=25.1076  ent=3.2841  sps=871  ep_ret=377.6  scout_ghost=0.095  interact_spot=0.018
+[step   76800] pg=-0.0526  vf=20.1881  ent=3.2972  sps=875  ep_ret=379.5  scout_ghost=0.086  interact_spot=0.038
+[step   80000] pg=-0.0517  vf=19.5611  ent=3.2975  sps=880  ep_ret=319.3  scout_ghost=0.105  interact_spot=0.032
+  [eval] return=341.2±281.4  win_rate=0.50  scout_ghost=0.006  interact_spot=0.071
+[step   83200] pg=-0.0432  vf=23.9319  ent=3.2617  sps=872  ep_ret=425.4  scout_ghost=0.091  interact_spot=0.025
+[step   86400] pg=-0.0424  vf=26.5144  ent=3.2511  sps=876  ep_ret=426.8  scout_ghost=0.091  interact_spot=0.040
+[step   89600] pg=-0.0526  vf=19.7689  ent=3.2516  sps=880  ep_ret=372.7  scout_ghost=0.099  interact_spot=0.034
+[step   92800] pg=-0.0483  vf=27.0545  ent=3.2635  sps=884  ep_ret=500.7  scout_ghost=0.081  interact_spot=0.027
+  [eval] return=433.5±252.5  win_rate=0.65  scout_ghost=0.049  interact_spot=0.055
+[step   96000] pg=-0.0538  vf=23.2519  ent=3.2578  sps=879  ep_ret=443.6  scout_ghost=0.093  interact_spot=0.053
+[step   99200] pg=-0.0455  vf=19.9193  ent=3.2600  sps=883  ep_ret=435.0  scout_ghost=0.096  interact_spot=0.032
+[step  102400] pg=-0.0507  vf=20.8404  ent=3.2162  sps=886  ep_ret=510.4  scout_ghost=0.103  interact_spot=0.030
+  [eval] return=332.4±288.5  win_rate=0.50  scout_ghost=0.092  interact_spot=0.013
+  [saved] checkpoints/mappo_stage1_step102400.pt
+[step  105600] pg=-0.0463  vf=18.9747  ent=3.2246  sps=880  ep_ret=483.2  scout_ghost=0.078  interact_spot=0.038
+[step  108800] pg=-0.0433  vf=21.7467  ent=3.1968  sps=883  ep_ret=508.6  scout_ghost=0.092  interact_spot=0.034
+[step  112000] pg=-0.0589  vf=16.2698  ent=3.2113  sps=885  ep_ret=491.7  scout_ghost=0.099  interact_spot=0.032
+  [eval] return=291.9±269.5  win_rate=0.40  scout_ghost=0.089  interact_spot=0.037
+[step  115200] pg=-0.0427  vf=16.9779  ent=3.2118  sps=878  ep_ret=476.3  scout_ghost=0.100  interact_spot=0.029
+[step  118400] pg=-0.0533  vf=16.5319  ent=3.2020  sps=881  ep_ret=489.4  scout_ghost=0.084  interact_spot=0.036
+[step  121600] pg=-0.0470  vf=14.7494  ent=3.1885  sps=884  ep_ret=497.2  scout_ghost=0.083  interact_spot=0.038
+  [eval] return=353.5±265.7  win_rate=0.50  scout_ghost=0.050  interact_spot=0.001
+[step  124800] pg=-0.0432  vf=27.0769  ent=3.1928  sps=879  ep_ret=516.7  scout_ghost=0.091  interact_spot=0.036
+[step  128000] pg=-0.0426  vf=28.5280  ent=3.1989  sps=881  ep_ret=459.7  scout_ghost=0.103  interact_spot=0.025
+[step  131200] pg=-0.0473  vf=22.6582  ent=3.1900  sps=883  ep_ret=507.2  scout_ghost=0.076  interact_spot=0.036
+  [eval] return=346.7±274.6  win_rate=0.50  scout_ghost=0.062  interact_spot=0.010
+[step  134400] pg=-0.0556  vf=20.0165  ent=3.1811  sps=879  ep_ret=545.7  scout_ghost=0.095  interact_spot=0.026
+[step  137600] pg=-0.0534  vf=15.6582  ent=3.2106  sps=881  ep_ret=464.0  scout_ghost=0.093  interact_spot=0.040
+[step  140800] pg=-0.0435  vf=24.5802  ent=3.2023  sps=883  ep_ret=455.3  scout_ghost=0.084  interact_spot=0.053
+  [eval] return=203.1±244.1  win_rate=0.25  scout_ghost=0.083  interact_spot=0.015
+[step  144000] pg=-0.0551  vf=10.9375  ent=3.2036  sps=877  ep_ret=470.5  scout_ghost=0.091  interact_spot=0.030
+[step  147200] pg=-0.0364  vf=16.3119  ent=3.1874  sps=879  ep_ret=470.5  scout_ghost=0.061  interact_spot=0.041
+[step  150400] pg=-0.0477  vf=17.7924  ent=3.1461  sps=881  ep_ret=547.7  scout_ghost=0.087  interact_spot=0.044
+  [eval] return=255.1±269.5  win_rate=0.35  scout_ghost=0.123  interact_spot=0.009
+  [saved] checkpoints/mappo_stage1_step150400.pt
+[step  153600] pg=-0.0475  vf=16.7431  ent=3.2370  sps=877  ep_ret=386.9  scout_ghost=0.076  interact_spot=0.073
+[step  156800] pg=-0.0450  vf=24.1687  ent=3.1737  sps=879  ep_ret=481.5  scout_ghost=0.090  interact_spot=0.024
+[step  160000] pg=-0.0456  vf=14.0317  ent=3.2246  sps=881  ep_ret=433.9  scout_ghost=0.082  interact_spot=0.036
+  [eval] return=356.5±262.4  win_rate=0.50  scout_ghost=0.046  interact_spot=0.001
+[step  163200] pg=-0.0423  vf=28.4225  ent=3.2197  sps=878  ep_ret=505.3  scout_ghost=0.080  interact_spot=0.040
+[step  166400] pg=-0.0496  vf=13.9366  ent=3.1893  sps=880  ep_ret=535.0  scout_ghost=0.098  interact_spot=0.032
+[step  169600] pg=-0.0468  vf=11.6412  ent=3.1811  sps=882  ep_ret=485.4  scout_ghost=0.086  interact_spot=0.046
+[step  172800] pg=-0.0460  vf=22.7864  ent=3.1630  sps=884  ep_ret=536.7  scout_ghost=0.075  interact_spot=0.051
+  [eval] return=334.5±287.4  win_rate=0.50  scout_ghost=0.057  interact_spot=0.029
+[step  176000] pg=-0.0420  vf=17.4689  ent=3.1539  sps=881  ep_ret=484.3  scout_ghost=0.089  interact_spot=0.029
+[step  179200] pg=-0.0606  vf=10.7686  ent=3.1505  sps=883  ep_ret=549.0  scout_ghost=0.089  interact_spot=0.034
+[step  182400] pg=-0.0492  vf=13.5135  ent=3.1778  sps=884  ep_ret=471.1  scout_ghost=0.084  interact_spot=0.037
+  [eval] return=392.9±278.6  win_rate=0.60  scout_ghost=0.045  interact_spot=0.005
+[step  185600] pg=-0.0417  vf=19.5729  ent=3.1559  sps=882  ep_ret=546.3  scout_ghost=0.092  interact_spot=0.027
+[step  188800] pg=-0.0449  vf=26.3979  ent=3.1819  sps=883  ep_ret=530.8  scout_ghost=0.080  interact_spot=0.052
+[step  192000] pg=-0.0433  vf=17.6894  ent=3.1784  sps=885  ep_ret=508.4  scout_ghost=0.076  interact_spot=0.039
+  [eval] return=298.3±262.7  win_rate=0.40  scout_ghost=0.027  interact_spot=0.017
+[step  195200] pg=-0.0388  vf=17.2152  ent=3.1628  sps=881  ep_ret=488.7  scout_ghost=0.079  interact_spot=0.037
+[step  198400] pg=-0.0419  vf=17.2911  ent=3.1892  sps=883  ep_ret=503.2  scout_ghost=0.089  interact_spot=0.033
+[step  201600] pg=-0.0567  vf=14.7644  ent=3.2040  sps=884  ep_ret=488.2  scout_ghost=0.085  interact_spot=0.041
+  [eval] return=236.0±252.0  win_rate=0.30  scout_ghost=0.042  interact_spot=0.006
+  [saved] checkpoints/mappo_stage1_step201600.pt
+[step  204800] pg=-0.0538  vf=15.6685  ent=3.1382  sps=880  ep_ret=553.1  scout_ghost=0.096  interact_spot=0.027
+[step  208000] pg=-0.0583  vf=5.9195  ent=3.1939  sps=882  ep_ret=491.8  scout_ghost=0.092  interact_spot=0.035
+[step  211200] pg=-0.0486  vf=13.8716  ent=3.1852  sps=883  ep_ret=497.7  scout_ghost=0.087  interact_spot=0.029
+  [eval] return=408.9±257.9  win_rate=0.60  scout_ghost=0.099  interact_spot=0.017
+[step  214400] pg=-0.0429  vf=17.0540  ent=3.1410  sps=881  ep_ret=533.1  scout_ghost=0.081  interact_spot=0.029
+[step  217600] pg=-0.0461  vf=13.2631  ent=3.1532  sps=882  ep_ret=541.9  scout_ghost=0.074  interact_spot=0.031
+[step  220800] pg=-0.0312  vf=21.3586  ent=3.1700  sps=884  ep_ret=492.9  scout_ghost=0.087  interact_spot=0.035
+  [eval] return=297.5±262.2  win_rate=0.40  scout_ghost=0.036  interact_spot=0.017
+[step  224000] pg=-0.0497  vf=11.0950  ent=3.1999  sps=880  ep_ret=486.9  scout_ghost=0.097  interact_spot=0.034
+[step  227200] pg=-0.0433  vf=20.4150  ent=3.1661  sps=881  ep_ret=531.9  scout_ghost=0.065  interact_spot=0.033
+[step  230400] pg=-0.0516  vf=12.7133  ent=3.1866  sps=883  ep_ret=470.9  scout_ghost=0.086  interact_spot=0.052
+  [eval] return=355.6±263.9  win_rate=0.50  scout_ghost=0.032  interact_spot=0.017
+[step  233600] pg=-0.0451  vf=21.3182  ent=3.1261  sps=880  ep_ret=530.6  scout_ghost=0.092  interact_spot=0.033
+[step  236800] pg=-0.0452  vf=14.2362  ent=3.1551  sps=881  ep_ret=500.9  scout_ghost=0.095  interact_spot=0.051
+[step  240000] pg=-0.0481  vf=17.6415  ent=3.1635  sps=882  ep_ret=496.7  scout_ghost=0.080  interact_spot=0.046
+  [eval] return=480.8±238.3  win_rate=0.75  scout_ghost=0.011  interact_spot=0.025
+  [best] win_rate=0.75 → checkpoints/mappo_stage1_step240000.pt
+[step  243200] pg=-0.0467  vf=9.9211  ent=3.1872  sps=881  ep_ret=445.5  scout_ghost=0.080  interact_spot=0.048
+[step  246400] pg=-0.0382  vf=19.5214  ent=3.1664  sps=883  ep_ret=469.3  scout_ghost=0.080  interact_spot=0.028
+[step  249600] pg=-0.0460  vf=23.1400  ent=3.1722  sps=884  ep_ret=534.9  scout_ghost=0.076  interact_spot=0.040
+[step  252800] pg=-0.0607  vf=12.7866  ent=3.1631  sps=885  ep_ret=552.8  scout_ghost=0.093  interact_spot=0.036
+  [eval] return=383.1±259.9  win_rate=0.55  scout_ghost=0.012  interact_spot=0.027
+  [saved] checkpoints/mappo_stage1_step252800.pt
+[step  256000] pg=-0.0412  vf=14.5114  ent=3.1545  sps=882  ep_ret=512.5  scout_ghost=0.088  interact_spot=0.055
+[step  259200] pg=-0.0423  vf=14.9531  ent=3.1760  sps=884  ep_ret=460.8  scout_ghost=0.096  interact_spot=0.049
+[step  262400] pg=-0.0575  vf=10.0010  ent=3.1734  sps=885  ep_ret=519.0  scout_ghost=0.090  interact_spot=0.034
+  [eval] return=460.8±240.5  win_rate=0.70  scout_ghost=0.076  interact_spot=0.019
+[step  265600] pg=-0.0428  vf=20.8669  ent=3.1921  sps=883  ep_ret=491.7  scout_ghost=0.106  interact_spot=0.039
+[step  268800] pg=-0.0513  vf=21.7028  ent=3.1257  sps=884  ep_ret=581.8  scout_ghost=0.077  interact_spot=0.047
+[step  272000] pg=-0.0418  vf=23.3818  ent=3.1769  sps=885  ep_ret=532.9  scout_ghost=0.076  interact_spot=0.042
+  [eval] return=330.3±261.4  win_rate=0.45  scout_ghost=0.021  interact_spot=0.031
+[step  275200] pg=-0.0461  vf=27.1480  ent=3.1619  sps=883  ep_ret=528.7  scout_ghost=0.106  interact_spot=0.038
+[step  278400] pg=-0.0544  vf=19.0480  ent=3.1394  sps=884  ep_ret=550.9  scout_ghost=0.083  interact_spot=0.031
+[step  281600] pg=-0.0609  vf=18.5029  ent=3.1694  sps=885  ep_ret=551.7  scout_ghost=0.089  interact_spot=0.045
+  [eval] return=462.7±238.1  win_rate=0.70  scout_ghost=0.094  interact_spot=0.040
+[step  284800] pg=-0.0597  vf=18.7450  ent=3.1215  sps=884  ep_ret=561.3  scout_ghost=0.090  interact_spot=0.032
+[step  288000] pg=-0.0458  vf=28.0898  ent=3.1400  sps=885  ep_ret=499.2  scout_ghost=0.093  interact_spot=0.049
+[step  291200] pg=-0.0482  vf=16.6165  ent=3.1489  sps=886  ep_ret=510.1  scout_ghost=0.085  interact_spot=0.030
+  [eval] return=356.7±262.4  win_rate=0.50  scout_ghost=0.158  interact_spot=0.000
+[step  294400] pg=-0.0467  vf=14.5773  ent=3.1651  sps=884  ep_ret=414.6  scout_ghost=0.081  interact_spot=0.039
+[step  297600] pg=-0.0574  vf=19.9989  ent=3.0977  sps=885  ep_ret=584.1  scout_ghost=0.101  interact_spot=0.039
+[step  300800] pg=-0.0507  vf=14.6520  ent=3.1403  sps=886  ep_ret=538.4  scout_ghost=0.096  interact_spot=0.027
+  [eval] return=455.9±251.2  win_rate=0.70  scout_ghost=0.085  interact_spot=0.016
+  [saved] checkpoints/mappo_stage1_step300800.pt
+[step  304000] pg=-0.0641  vf=7.8567  ent=3.1389  sps=884  ep_ret=513.6  scout_ghost=0.085  interact_spot=0.045
+[step  307200] pg=-0.0485  vf=22.6962  ent=3.1449  sps=885  ep_ret=534.9  scout_ghost=0.087  interact_spot=0.036
+[step  310400] pg=-0.0541  vf=9.1943  ent=3.1833  sps=886  ep_ret=470.5  scout_ghost=0.092  interact_spot=0.021
+  [eval] return=403.1±265.9  win_rate=0.60  scout_ghost=0.030  interact_spot=0.000
+[step  313600] pg=-0.0422  vf=16.7047  ent=3.1587  sps=885  ep_ret=501.3  scout_ghost=0.078  interact_spot=0.040
+[step  316800] pg=-0.0501  vf=15.4530  ent=3.1194  sps=886  ep_ret=551.3  scout_ghost=0.086  interact_spot=0.023
+[step  320000] pg=-0.0574  vf=9.9813  ent=3.1156  sps=886  ep_ret=524.9  scout_ghost=0.092  interact_spot=0.043
+  [eval] return=513.3±210.9  win_rate=0.80  scout_ghost=0.059  interact_spot=0.022
+  [best] win_rate=0.80 → checkpoints/mappo_stage1_step320000.pt
+[step  323200] pg=-0.0536  vf=16.8549  ent=3.1164  sps=886  ep_ret=557.6  scout_ghost=0.089  interact_spot=0.035
+[step  326400] pg=-0.0562  vf=16.8581  ent=3.1103  sps=887  ep_ret=569.3  scout_ghost=0.107  interact_spot=0.042
+[step  329600] pg=-0.0578  vf=10.6840  ent=3.1435  sps=887  ep_ret=513.3  scout_ghost=0.091  interact_spot=0.039
+[step  332800] pg=-0.0432  vf=16.9387  ent=3.1031  sps=888  ep_ret=550.0  scout_ghost=0.083  interact_spot=0.040
+  [eval] return=436.2±250.2  win_rate=0.65  scout_ghost=0.038  interact_spot=0.001
+[step  336000] pg=-0.0477  vf=16.1585  ent=3.1492  sps=887  ep_ret=511.9  scout_ghost=0.063  interact_spot=0.040
+[step  339200] pg=-0.0570  vf=12.0398  ent=3.1330  sps=888  ep_ret=531.1  scout_ghost=0.097  interact_spot=0.030
+[step  342400] pg=-0.0502  vf=13.3340  ent=3.1280  sps=889  ep_ret=553.5  scout_ghost=0.083  interact_spot=0.043
+  [eval] return=458.2±248.4  win_rate=0.70  scout_ghost=0.064  interact_spot=0.097
+[step  345600] pg=-0.0407  vf=19.4440  ent=3.1248  sps=888  ep_ret=533.5  scout_ghost=0.096  interact_spot=0.037
+[step  348800] pg=-0.0401  vf=22.2621  ent=3.1186  sps=889  ep_ret=512.4  scout_ghost=0.096  interact_spot=0.037
+[step  352000] pg=-0.0468  vf=20.0030  ent=3.1208  sps=889  ep_ret=588.6  scout_ghost=0.097  interact_spot=0.048
+  [eval] return=513.2±209.8  win_rate=0.80  scout_ghost=0.053  interact_spot=0.029
+  [saved] checkpoints/mappo_stage1_step352000.pt
+[step  355200] pg=-0.0583  vf=19.2162  ent=3.1060  sps=889  ep_ret=569.3  scout_ghost=0.080  interact_spot=0.043
+[step  358400] pg=-0.0461  vf=21.7300  ent=3.1546  sps=889  ep_ret=525.8  scout_ghost=0.075  interact_spot=0.031
+[step  361600] pg=-0.0489  vf=17.6946  ent=3.1186  sps=890  ep_ret=540.7  scout_ghost=0.083  interact_spot=0.036
+  [eval] return=513.5±209.7  win_rate=0.80  scout_ghost=0.048  interact_spot=0.010
+[step  364800] pg=-0.0424  vf=26.5653  ent=3.1313  sps=890  ep_ret=537.1  scout_ghost=0.083  interact_spot=0.038
+[step  368000] pg=-0.0508  vf=17.2148  ent=3.1554  sps=891  ep_ret=502.3  scout_ghost=0.085  interact_spot=0.040
+[step  371200] pg=-0.0635  vf=18.4445  ent=3.1004  sps=891  ep_ret=584.5  scout_ghost=0.098  interact_spot=0.038
+  [eval] return=381.8±263.1  win_rate=0.55  scout_ghost=0.073  interact_spot=0.001
+[step  374400] pg=-0.0588  vf=14.0927  ent=3.1291  sps=890  ep_ret=547.0  scout_ghost=0.095  interact_spot=0.032
+[step  377600] pg=-0.0569  vf=15.4739  ent=3.0922  sps=891  ep_ret=575.3  scout_ghost=0.090  interact_spot=0.042
+[step  380800] pg=-0.0494  vf=18.1235  ent=3.1223  sps=891  ep_ret=549.0  scout_ghost=0.099  interact_spot=0.034
+  [eval] return=429.5±259.9  win_rate=0.65  scout_ghost=0.041  interact_spot=0.010
+[step  384000] pg=-0.0374  vf=19.6436  ent=3.1048  sps=890  ep_ret=549.0  scout_ghost=0.095  interact_spot=0.052
+[step  387200] pg=-0.0502  vf=22.4492  ent=3.0825  sps=891  ep_ret=568.4  scout_ghost=0.086  interact_spot=0.034
+[step  390400] pg=-0.0519  vf=20.4355  ent=3.1141  sps=892  ep_ret=565.1  scout_ghost=0.109  interact_spot=0.041
+  [eval] return=431.6±257.5  win_rate=0.65  scout_ghost=0.092  interact_spot=0.060
+[step  393600] pg=-0.0521  vf=13.7268  ent=3.1479  sps=890  ep_ret=512.9  scout_ghost=0.092  interact_spot=0.027
+[step  396800] pg=-0.0676  vf=11.2534  ent=3.0625  sps=891  ep_ret=570.7  scout_ghost=0.103  interact_spot=0.047
+[step  400000] pg=-0.0441  vf=20.4686  ent=3.1327  sps=892  ep_ret=538.5  scout_ghost=0.088  interact_spot=0.034
+  [eval] return=410.9±255.6  win_rate=0.60  scout_ghost=0.022  interact_spot=0.006
+  [saved] checkpoints/mappo_stage1_step400000.pt
+[step  403200] pg=-0.0519  vf=21.0004  ent=3.0810  sps=890  ep_ret=547.1  scout_ghost=0.087  interact_spot=0.044
+[step  406400] pg=-0.0521  vf=26.1165  ent=3.1123  sps=891  ep_ret=547.3  scout_ghost=0.108  interact_spot=0.042
+[step  409600] pg=-0.0634  vf=20.1129  ent=3.0934  sps=892  ep_ret=586.1  scout_ghost=0.103  interact_spot=0.045
+[step  412800] pg=-0.0567  vf=15.0341  ent=3.1215  sps=892  ep_ret=544.0  scout_ghost=0.088  interact_spot=0.029
+  [eval] return=408.9±258.5  win_rate=0.60  scout_ghost=0.107  interact_spot=0.007
+[step  416000] pg=-0.0737  vf=8.9267  ent=3.0675  sps=891  ep_ret=604.7  scout_ghost=0.097  interact_spot=0.028
+[step  419200] pg=-0.0475  vf=25.1977  ent=3.0843  sps=892  ep_ret=578.8  scout_ghost=0.118  interact_spot=0.054
+[step  422400] pg=-0.0535  vf=22.9100  ent=3.0947  sps=892  ep_ret=574.5  scout_ghost=0.100  interact_spot=0.054
+  [eval] return=436.7±250.1  win_rate=0.65  scout_ghost=0.066  interact_spot=0.005
+[step  425600] pg=-0.0532  vf=27.5191  ent=3.1048  sps=891  ep_ret=540.5  scout_ghost=0.101  interact_spot=0.031
+[step  428800] pg=-0.0599  vf=14.6543  ent=3.0725  sps=892  ep_ret=573.6  scout_ghost=0.081  interact_spot=0.027
+[step  432000] pg=-0.0588  vf=10.3530  ent=3.0964  sps=893  ep_ret=571.1  scout_ghost=0.099  interact_spot=0.034
+  [eval] return=381.8±262.9  win_rate=0.55  scout_ghost=0.079  interact_spot=0.017
+[step  435200] pg=-0.0583  vf=12.9038  ent=3.0663  sps=891  ep_ret=594.4  scout_ghost=0.094  interact_spot=0.038
+[step  438400] pg=-0.0382  vf=15.0581  ent=3.0622  sps=892  ep_ret=559.1  scout_ghost=0.095  interact_spot=0.048
+[step  441600] pg=-0.0607  vf=16.7818  ent=3.0645  sps=893  ep_ret=586.6  scout_ghost=0.095  interact_spot=0.038
+  [eval] return=457.2±250.1  win_rate=0.70  scout_ghost=0.058  interact_spot=0.041
+[step  444800] pg=-0.0576  vf=18.9384  ent=3.0628  sps=892  ep_ret=590.1  scout_ghost=0.096  interact_spot=0.048
+[step  448000] pg=-0.0565  vf=18.0430  ent=3.1044  sps=892  ep_ret=581.6  scout_ghost=0.094  interact_spot=0.043
+[step  451200] pg=-0.0606  vf=14.8503  ent=3.0579  sps=893  ep_ret=593.7  scout_ghost=0.104  interact_spot=0.037
+  [eval] return=542.0±187.6  win_rate=0.85  scout_ghost=0.092  interact_spot=0.016
+  [best] win_rate=0.85 → checkpoints/mappo_stage1_step451200.pt
+  [saved] checkpoints/mappo_stage1_step451200.pt
+[step  454400] pg=-0.0537  vf=18.5214  ent=3.1105  sps=893  ep_ret=563.8  scout_ghost=0.114  interact_spot=0.038
+[step  457600] pg=-0.0630  vf=14.8141  ent=3.0601  sps=894  ep_ret=602.0  scout_ghost=0.117  interact_spot=0.032
+[step  460800] pg=-0.0489  vf=17.4997  ent=3.0550  sps=894  ep_ret=570.4  scout_ghost=0.091  interact_spot=0.042
+  [eval] return=533.0±204.0  win_rate=0.85  scout_ghost=0.097  interact_spot=0.054
+[step  464000] pg=-0.0623  vf=18.3432  ent=3.0615  sps=894  ep_ret=595.8  scout_ghost=0.107  interact_spot=0.031
+[step  467200] pg=-0.0656  vf=13.3511  ent=3.0414  sps=895  ep_ret=597.1  scout_ghost=0.105  interact_spot=0.037
+[step  470400] pg=-0.0578  vf=16.3178  ent=3.0435  sps=895  ep_ret=598.5  scout_ghost=0.114  interact_spot=0.040
+  [eval] return=561.1±175.4  win_rate=0.90  scout_ghost=0.101  interact_spot=0.025
+  [best] win_rate=0.90 → checkpoints/mappo_stage1_step470400.pt
+[step  473600] pg=-0.0670  vf=11.2198  ent=3.0526  sps=895  ep_ret=603.2  scout_ghost=0.103  interact_spot=0.040
+[step  476800] pg=-0.0568  vf=14.0827  ent=3.0507  sps=896  ep_ret=594.8  scout_ghost=0.092  interact_spot=0.042
+[step  480000] pg=-0.0623  vf=11.7636  ent=3.0511  sps=897  ep_ret=602.4  scout_ghost=0.093  interact_spot=0.036
+  [eval] return=541.4±187.5  win_rate=0.85  scout_ghost=0.079  interact_spot=0.052
+[step  483200] pg=-0.0620  vf=9.9723  ent=3.0364  sps=896  ep_ret=604.6  scout_ghost=0.113  interact_spot=0.035
+[step  486400] pg=-0.0526  vf=10.8615  ent=3.0278  sps=897  ep_ret=583.9  scout_ghost=0.098  interact_spot=0.040
+[step  489600] pg=-0.0558  vf=13.3704  ent=3.0189  sps=897  ep_ret=605.7  scout_ghost=0.092  interact_spot=0.048
+[step  492800] pg=-0.0470  vf=7.3889  ent=3.0205  sps=898  ep_ret=599.2  scout_ghost=0.094  interact_spot=0.042
+  [eval] return=513.5±210.9  win_rate=0.80  scout_ghost=0.097  interact_spot=0.003
+[step  496000] pg=-0.0524  vf=8.9245  ent=3.0152  sps=897  ep_ret=604.4  scout_ghost=0.106  interact_spot=0.042
+[step  499200] pg=-0.0591  vf=10.1233  ent=3.0091  sps=898  ep_ret=619.1  scout_ghost=0.116  interact_spot=0.045
+[step  502400] pg=-0.0736  vf=5.9111  ent=3.0003  sps=898  ep_ret=612.7  scout_ghost=0.109  interact_spot=0.038
+  [eval] return=368.4±281.9  win_rate=0.55  scout_ghost=0.079  interact_spot=0.045
+  [saved] checkpoints/mappo_stage1_step502400.pt
+[step  505600] pg=-0.0631  vf=6.4423  ent=2.9835  sps=897  ep_ret=612.1  scout_ghost=0.089  interact_spot=0.040
+[step  508800] pg=-0.0498  vf=12.5872  ent=2.9899  sps=898  ep_ret=600.2  scout_ghost=0.101  interact_spot=0.043
+[step  512000] pg=-0.0456  vf=18.8501  ent=3.0173  sps=898  ep_ret=593.1  scout_ghost=0.100  interact_spot=0.041
+  [eval] return=621.6±3.7  win_rate=1.00  scout_ghost=0.077  interact_spot=0.109
+  [best] win_rate=1.00 → checkpoints/mappo_stage1_step512000.pt
+[step  515200] pg=-0.0480  vf=12.0322  ent=3.0299  sps=898  ep_ret=598.3  scout_ghost=0.093  interact_spot=0.042
+[step  518400] pg=-0.0417  vf=14.7018  ent=3.0184  sps=899  ep_ret=596.0  scout_ghost=0.104  interact_spot=0.048
+[step  521600] pg=-0.0502  vf=13.9696  ent=3.0102  sps=899  ep_ret=592.3  scout_ghost=0.092  interact_spot=0.032
+  [eval] return=565.8±158.0  win_rate=0.90  scout_ghost=0.114  interact_spot=0.017
+[step  524800] pg=-0.0593  vf=10.4833  ent=3.0270  sps=899  ep_ret=599.3  scout_ghost=0.092  interact_spot=0.036
+[step  528000] pg=-0.0696  vf=7.0977  ent=3.0375  sps=899  ep_ret=611.9  scout_ghost=0.099  interact_spot=0.048
+[step  531200] pg=-0.0274  vf=16.6078  ent=3.0059  sps=900  ep_ret=583.0  scout_ghost=0.108  interact_spot=0.039
+  [eval] return=619.2±3.2  win_rate=1.00  scout_ghost=0.038  interact_spot=0.017
+[step  534400] pg=-0.0401  vf=19.7073  ent=3.0270  sps=900  ep_ret=578.3  scout_ghost=0.114  interact_spot=0.027
+[step  537600] pg=-0.0440  vf=17.5973  ent=3.0080  sps=900  ep_ret=598.3  scout_ghost=0.092  interact_spot=0.039
+[step  540800] pg=-0.0486  vf=14.9796  ent=3.0269  sps=901  ep_ret=611.9  scout_ghost=0.104  interact_spot=0.034
+  [eval] return=540.5±188.9  win_rate=0.85  scout_ghost=0.049  interact_spot=0.026
+[step  544000] pg=-0.0669  vf=10.7331  ent=3.0127  sps=900  ep_ret=618.1  scout_ghost=0.103  interact_spot=0.046
+[step  547200] pg=-0.0498  vf=13.0454  ent=3.0013  sps=901  ep_ret=605.9  scout_ghost=0.095  interact_spot=0.034
+[step  550400] pg=-0.0563  vf=9.7885  ent=2.9836  sps=901  ep_ret=613.8  scout_ghost=0.108  interact_spot=0.041
+  [eval] return=564.3±157.0  win_rate=0.90  scout_ghost=0.039  interact_spot=0.032
+  [saved] checkpoints/mappo_stage1_step550400.pt
+[step  553600] pg=-0.0447  vf=14.6602  ent=3.0101  sps=901  ep_ret=606.8  scout_ghost=0.101  interact_spot=0.045
+[step  556800] pg=-0.0722  vf=5.9328  ent=3.0153  sps=902  ep_ret=611.4  scout_ghost=0.107  interact_spot=0.041
+[step  560000] pg=-0.0269  vf=18.8113  ent=2.9915  sps=902  ep_ret=593.1  scout_ghost=0.103  interact_spot=0.037
+  [eval] return=566.7±157.4  win_rate=0.90  scout_ghost=0.047  interact_spot=0.022
+[step  563200] pg=-0.0566  vf=5.6643  ent=2.9949  sps=902  ep_ret=605.9  scout_ghost=0.111  interact_spot=0.029
+[step  566400] pg=-0.0457  vf=12.9592  ent=3.0031  sps=902  ep_ret=605.8  scout_ghost=0.089  interact_spot=0.038
+[step  569600] pg=-0.0468  vf=13.9407  ent=3.0067  sps=903  ep_ret=586.1  scout_ghost=0.104  interact_spot=0.052
+[step  572800] pg=-0.0593  vf=7.5205  ent=3.0024  sps=903  ep_ret=612.4  scout_ghost=0.101  interact_spot=0.034
+  [eval] return=563.2±174.2  win_rate=0.90  scout_ghost=0.079  interact_spot=0.066
+[step  576000] pg=-0.0410  vf=16.2256  ent=3.0122  sps=903  ep_ret=594.0  scout_ghost=0.104  interact_spot=0.039
+[step  579200] pg=-0.0659  vf=4.8458  ent=2.9927  sps=903  ep_ret=619.2  scout_ghost=0.114  interact_spot=0.043
+[step  582400] pg=-0.0810  vf=2.7176  ent=2.9781  sps=904  ep_ret=618.8  scout_ghost=0.101  interact_spot=0.040
+  [eval] return=593.4±112.7  win_rate=0.95  scout_ghost=0.069  interact_spot=0.045
+[step  585600] pg=-0.0445  vf=10.2523  ent=3.0027  sps=904  ep_ret=606.6  scout_ghost=0.094  interact_spot=0.046
+[step  588800] pg=-0.0568  vf=5.2564  ent=2.9918  sps=904  ep_ret=613.5  scout_ghost=0.104  interact_spot=0.056
+[step  592000] pg=-0.0560  vf=7.6564  ent=2.9946  sps=905  ep_ret=612.8  scout_ghost=0.112  interact_spot=0.041
+  [eval] return=593.2±115.0  win_rate=0.95  scout_ghost=0.057  interact_spot=0.054
+[step  595200] pg=-0.0696  vf=3.3501  ent=2.9618  sps=905  ep_ret=619.6  scout_ghost=0.101  interact_spot=0.048
+[step  598400] pg=-0.0394  vf=12.4291  ent=2.9947  sps=905  ep_ret=601.5  scout_ghost=0.103  interact_spot=0.051
+[step  601600] pg=-0.0663  vf=4.3789  ent=2.9524  sps=906  ep_ret=618.6  scout_ghost=0.113  interact_spot=0.039
+  [eval] return=565.7±158.2  win_rate=0.90  scout_ghost=0.065  interact_spot=0.042
+  [saved] checkpoints/mappo_stage1_step601600.pt
+[step  604800] pg=-0.0347  vf=19.1185  ent=2.9941  sps=906  ep_ret=598.3  scout_ghost=0.097  interact_spot=0.041
+[step  608000] pg=-0.0536  vf=6.6222  ent=2.9755  sps=906  ep_ret=614.1  scout_ghost=0.109  interact_spot=0.034
+[step  611200] pg=-0.0710  vf=3.0581  ent=2.9419  sps=907  ep_ret=619.2  scout_ghost=0.106  interact_spot=0.045
+  [eval] return=566.7±158.3  win_rate=0.90  scout_ghost=0.095  interact_spot=0.012
+[step  614400] pg=-0.0505  vf=6.8145  ent=2.9615  sps=906  ep_ret=614.3  scout_ghost=0.108  interact_spot=0.059
+[step  617600] pg=-0.0524  vf=7.3317  ent=2.9826  sps=907  ep_ret=614.2  scout_ghost=0.103  interact_spot=0.043
+[step  620800] pg=-0.0431  vf=12.1985  ent=3.0033  sps=907  ep_ret=606.7  scout_ghost=0.090  interact_spot=0.049
+  [eval] return=619.4±3.4  win_rate=1.00  scout_ghost=0.175  interact_spot=0.014
+[step  624000] pg=-0.0921  vf=2.8770  ent=2.9500  sps=908  ep_ret=618.9  scout_ghost=0.090  interact_spot=0.041
+[step  627200] pg=-0.0834  vf=2.2601  ent=2.9313  sps=908  ep_ret=619.2  scout_ghost=0.107  interact_spot=0.044
+[step  630400] pg=-0.0487  vf=6.5666  ent=2.9492  sps=909  ep_ret=614.8  scout_ghost=0.109  interact_spot=0.041
+  [eval] return=568.6±157.4  win_rate=0.90  scout_ghost=0.074  interact_spot=0.035
+[step  633600] pg=-0.0499  vf=5.3484  ent=2.9471  sps=908  ep_ret=614.4  scout_ghost=0.100  interact_spot=0.047
+[step  636800] pg=-0.0719  vf=2.4027  ent=2.9321  sps=909  ep_ret=619.6  scout_ghost=0.103  interact_spot=0.044
+[step  640000] pg=-0.0342  vf=12.3861  ent=2.9446  sps=909  ep_ret=608.3  scout_ghost=0.095  interact_spot=0.049
+  [eval] return=593.0±114.0  win_rate=0.95  scout_ghost=0.110  interact_spot=0.027
+[step  643200] pg=-0.0465  vf=6.7375  ent=2.9643  sps=909  ep_ret=613.4  scout_ghost=0.108  interact_spot=0.047
+[step  646400] pg=-0.0422  vf=7.1737  ent=2.9557  sps=910  ep_ret=613.2  scout_ghost=0.102  interact_spot=0.053
+[step  649600] pg=-0.0491  vf=3.9731  ent=2.9403  sps=910  ep_ret=614.3  scout_ghost=0.114  interact_spot=0.051
+[step  652800] pg=-0.0667  vf=2.9446  ent=2.9414  sps=911  ep_ret=619.0  scout_ghost=0.103  interact_spot=0.038
+  [eval] return=509.7±221.6  win_rate=0.80  scout_ghost=0.081  interact_spot=0.036
+  [saved] checkpoints/mappo_stage1_step652800.pt
+[step  656000] pg=-0.0715  vf=2.5720  ent=2.9142  sps=910  ep_ret=619.0  scout_ghost=0.100  interact_spot=0.040
+[step  659200] pg=-0.0439  vf=6.7994  ent=2.9248  sps=911  ep_ret=613.8  scout_ghost=0.097  interact_spot=0.057
+[step  662400] pg=-0.0814  vf=2.1203  ent=2.9242  sps=911  ep_ret=619.5  scout_ghost=0.099  interact_spot=0.043
+  [eval] return=593.6±114.6  win_rate=0.95  scout_ghost=0.067  interact_spot=0.049
+[step  665600] pg=-0.0708  vf=2.7807  ent=2.9400  sps=911  ep_ret=619.6  scout_ghost=0.104  interact_spot=0.047
+[step  668800] pg=-0.0916  vf=1.2001  ent=2.9003  sps=912  ep_ret=619.2  scout_ghost=0.111  interact_spot=0.040
+[step  672000] pg=-0.0690  vf=1.8118  ent=2.9012  sps=912  ep_ret=619.1  scout_ghost=0.110  interact_spot=0.044
+  [eval] return=478.3±246.2  win_rate=0.75  scout_ghost=0.068  interact_spot=0.031
+[step  675200] pg=-0.0660  vf=3.2693  ent=2.8984  sps=912  ep_ret=618.8  scout_ghost=0.111  interact_spot=0.037
+[step  678400] pg=-0.0649  vf=1.4234  ent=2.8934  sps=912  ep_ret=619.1  scout_ghost=0.097  interact_spot=0.035
+[step  681600] pg=-0.0862  vf=1.2194  ent=2.8634  sps=912  ep_ret=619.0  scout_ghost=0.100  interact_spot=0.036
+  [eval] return=567.9±157.9  win_rate=0.90  scout_ghost=0.117  interact_spot=0.008
+[step  684800] pg=-0.0853  vf=0.9576  ent=2.8735  sps=912  ep_ret=619.4  scout_ghost=0.100  interact_spot=0.040
+[step  688000] pg=-0.0758  vf=1.2562  ent=2.8679  sps=912  ep_ret=618.8  scout_ghost=0.102  interact_spot=0.041
+[step  691200] pg=-0.0226  vf=9.7861  ent=2.8765  sps=913  ep_ret=608.2  scout_ghost=0.101  interact_spot=0.036
+  [eval] return=568.2±157.6  win_rate=0.90  scout_ghost=0.066  interact_spot=0.057
+[step  694400] pg=-0.0768  vf=1.4330  ent=2.8649  sps=912  ep_ret=619.3  scout_ghost=0.111  interact_spot=0.041
+[step  697600] pg=-0.0701  vf=1.7862  ent=2.8483  sps=913  ep_ret=619.5  scout_ghost=0.107  interact_spot=0.040
+[step  700800] pg=-0.0701  vf=2.1024  ent=2.8553  sps=913  ep_ret=619.4  scout_ghost=0.110  interact_spot=0.045
+  [eval] return=566.2±158.0  win_rate=0.90  scout_ghost=0.095  interact_spot=0.040
+  [saved] checkpoints/mappo_stage1_step700800.pt
+[step  704000] pg=-0.0641  vf=1.2644  ent=2.8516  sps=912  ep_ret=619.4  scout_ghost=0.119  interact_spot=0.046
+[step  707200] pg=-0.0718  vf=1.5802  ent=2.8418  sps=912  ep_ret=619.2  scout_ghost=0.103  interact_spot=0.041
+[step  710400] pg=-0.0384  vf=4.1885  ent=2.8556  sps=911  ep_ret=614.4  scout_ghost=0.102  interact_spot=0.051
+  [eval] return=593.4±112.9  win_rate=0.95  scout_ghost=0.112  interact_spot=0.017
+[step  713600] pg=-0.0561  vf=2.7870  ent=2.8752  sps=911  ep_ret=619.8  scout_ghost=0.117  interact_spot=0.050
+[step  716800] pg=-0.0711  vf=1.6347  ent=2.8548  sps=910  ep_ret=619.5  scout_ghost=0.116  interact_spot=0.043
+[step  720000] pg=-0.0726  vf=1.2341  ent=2.8386  sps=910  ep_ret=619.9  scout_ghost=0.116  interact_spot=0.046
+  [eval] return=621.2±4.0  win_rate=1.00  scout_ghost=0.082  interact_spot=0.094
+[step  723200] pg=-0.0651  vf=1.6200  ent=2.8646  sps=909  ep_ret=619.4  scout_ghost=0.108  interact_spot=0.044
+[step  726400] pg=-0.0252  vf=5.3472  ent=2.8579  sps=909  ep_ret=615.8  scout_ghost=0.106  interact_spot=0.058
+[step  729600] pg=-0.0803  vf=0.9614  ent=2.8424  sps=909  ep_ret=619.9  scout_ghost=0.102  interact_spot=0.041
+[step  732800] pg=-0.0683  vf=1.1140  ent=2.8438  sps=908  ep_ret=619.7  scout_ghost=0.103  interact_spot=0.043
+  [eval] return=621.3±2.1  win_rate=1.00  scout_ghost=0.130  interact_spot=0.094
+[step  736000] pg=-0.0391  vf=3.9251  ent=2.8451  sps=907  ep_ret=615.0  scout_ghost=0.102  interact_spot=0.047
+[step  739200] pg=-0.0503  vf=3.0407  ent=2.8463  sps=907  ep_ret=620.1  scout_ghost=0.119  interact_spot=0.051
+[step  742400] pg=-0.0694  vf=1.6161  ent=2.8573  sps=906  ep_ret=620.4  scout_ghost=0.105  interact_spot=0.039
+  [eval] return=595.1±115.1  win_rate=0.95  scout_ghost=0.121  interact_spot=0.043
+[step  745600] pg=-0.0315  vf=3.9015  ent=2.8708  sps=905  ep_ret=615.5  scout_ghost=0.119  interact_spot=0.047
+[step  748800] pg=-0.0395  vf=4.9539  ent=2.8733  sps=905  ep_ret=615.2  scout_ghost=0.094  interact_spot=0.050
+[step  752000] pg=-0.0338  vf=4.2774  ent=2.8704  sps=904  ep_ret=615.3  scout_ghost=0.110  interact_spot=0.052
+  [eval] return=566.5±158.9  win_rate=0.90  scout_ghost=0.058  interact_spot=0.063
+  [saved] checkpoints/mappo_stage1_step752000.pt
+[step  755200] pg=-0.0388  vf=5.6892  ent=2.8977  sps=903  ep_ret=614.2  scout_ghost=0.100  interact_spot=0.040
+[step  758400] pg=-0.0707  vf=1.2084  ent=2.8565  sps=903  ep_ret=619.9  scout_ghost=0.104  interact_spot=0.047
+[step  761600] pg=-0.0333  vf=5.9969  ent=2.8784  sps=902  ep_ret=614.6  scout_ghost=0.121  interact_spot=0.045
+  [eval] return=567.1±158.3  win_rate=0.90  scout_ghost=0.069  interact_spot=0.056
+[step  764800] pg=-0.0707  vf=1.8993  ent=2.8679  sps=901  ep_ret=620.3  scout_ghost=0.108  interact_spot=0.053
+[step  768000] pg=-0.0308  vf=5.3013  ent=2.8855  sps=901  ep_ret=614.2  scout_ghost=0.110  interact_spot=0.051
+[step  771200] pg=-0.0621  vf=2.2184  ent=2.8664  sps=899  ep_ret=619.3  scout_ghost=0.103  interact_spot=0.047
+  [eval] return=620.8±2.6  win_rate=1.00  scout_ghost=0.065  interact_spot=0.010
+[step  774400] pg=-0.0746  vf=1.3026  ent=2.8640  sps=899  ep_ret=619.8  scout_ghost=0.114  interact_spot=0.058
+[step  777600] pg=-0.0342  vf=3.4194  ent=2.8652  sps=898  ep_ret=615.6  scout_ghost=0.096  interact_spot=0.051
+[step  780800] pg=-0.0772  vf=0.6257  ent=2.8575  sps=898  ep_ret=620.2  scout_ghost=0.110  interact_spot=0.064
+  [eval] return=620.1±3.8  win_rate=1.00  scout_ghost=0.101  interact_spot=0.053
+[step  784000] pg=-0.0640  vf=1.1400  ent=2.8650  sps=897  ep_ret=619.7  scout_ghost=0.106  interact_spot=0.049
+[step  787200] pg=-0.0324  vf=3.4921  ent=2.8728  sps=897  ep_ret=615.5  scout_ghost=0.111  interact_spot=0.059
+[step  790400] pg=-0.0600  vf=2.2942  ent=2.8855  sps=896  ep_ret=619.7  scout_ghost=0.122  interact_spot=0.071
+  [eval] return=619.6±3.0  win_rate=1.00  scout_ghost=0.077  interact_spot=0.052
+[step  793600] pg=-0.0281  vf=7.5752  ent=2.8741  sps=896  ep_ret=614.4  scout_ghost=0.115  interact_spot=0.051
+[step  796800] pg=-0.0712  vf=0.8960  ent=2.8596  sps=895  ep_ret=619.6  scout_ghost=0.114  interact_spot=0.043
+[step  800000] pg=-0.0781  vf=0.6818  ent=2.8502  sps=895  ep_ret=619.7  scout_ghost=0.107  interact_spot=0.050
+  [eval] return=593.1±115.6  win_rate=0.95  scout_ghost=0.073  interact_spot=0.056
+  [saved] checkpoints/mappo_stage1_step800000.pt
+[step  803200] pg=-0.0815  vf=0.5465  ent=2.8434  sps=894  ep_ret=620.0  scout_ghost=0.117  interact_spot=0.062
+[step  806400] pg=-0.0654  vf=0.7614  ent=2.8371  sps=894  ep_ret=620.3  scout_ghost=0.119  interact_spot=0.049
+[step  809600] pg=-0.0770  vf=0.6062  ent=2.8199  sps=893  ep_ret=619.2  scout_ghost=0.094  interact_spot=0.059

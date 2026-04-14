@@ -33,8 +33,10 @@ class HeteroQuadEnv(ParallelEnv):
         max_steps: int,
         map_path: str | Path,
         use_rough_zones: bool = True,
+        use_walls: bool = True,
         battery_drain: bool = True,
         full_dynamics: bool = True,
+        dt: float = 0.1,
         render_mode: str | None = None,
     ) -> None:
         self.possible_agents = ["spot", "ghost"]
@@ -46,7 +48,7 @@ class HeteroQuadEnv(ParallelEnv):
         self.battery_drain = bool(battery_drain)
         self.full_dynamics = bool(full_dynamics)
         map_cfg = load_map_config(map_path)
-        self.world = World.from_config(map_cfg, use_rough_zones=use_rough_zones)
+        self.world = World.from_config(map_cfg, use_rough_zones=use_rough_zones, use_walls=use_walls, dt=dt)
         self.charge_point = np.array(self.world.charge_point, dtype=np.float32)
         self.tasks = TaskManager(self.num_targets)
         self._rng = np.random.default_rng(0)
@@ -55,8 +57,11 @@ class HeteroQuadEnv(ParallelEnv):
         self._states: dict[str, RobotState] = {}
         self._death_latched = {agent: False for agent in self.possible_agents}
         self._metrics = MetricsTracker()
+        self._prev_nearest_dist: dict[str, float] = {}  # for approach shaping
 
-        obs_dim = 10 + 4 + 3 * self.num_targets + 100
+        occ_dim = 100 if (self.world.obstacles or self.world.rough_zones) else 0
+        obs_dim = 10 + 4 + 3 * self.num_targets + occ_dim
+        self._occ_dim = occ_dim
         hi = np.full((obs_dim,), np.float32(np.finfo(np.float32).max), dtype=np.float32)
         self._observation_spaces = {
             agent: spaces.Box(low=-hi, high=hi, dtype=np.float32) for agent in self.possible_agents
@@ -96,6 +101,8 @@ class HeteroQuadEnv(ParallelEnv):
         self.tasks.reset(self.world, self._rng)
         self.tasks.update_reveals({a: (s.x, s.y) for a, s in self._states.items()})
         self._metrics.reset()
+        # Initialize approach distance tracking
+        self._prev_nearest_dist = self._compute_nearest_target_dists()
 
         obs = {agent: self._build_obs(agent) for agent in self.possible_agents}
         infos = {
@@ -122,8 +129,16 @@ class HeteroQuadEnv(ParallelEnv):
             type_idx = int(np.clip(type_idx, 0, 4))
             action_type = _ACTION_ORDER[type_idx]
             target = np.asarray(action.get("target", [self._states[agent].x, self._states[agent].y]), dtype=np.float32)
-            commanded[agent] = tuple(self.world.clip_target(target).tolist())
+            # For non-movement actions, the commanded waypoint is the agent's current position
+            if action_type in (ActionType.SCOUT, ActionType.MOVE_TO):
+                commanded[agent] = tuple(self.world.clip_target(target).tolist())
+            else:
+                commanded[agent] = (self._states[agent].x, self._states[agent].y)
             action_types[agent] = action_type
+
+        # Capture mask before physics so metric #2 sees the mask that was
+        # in force when the actor chose this step's actions.
+        pre_step_masks = {a: self._compute_action_mask(a) for a in self.possible_agents}
 
         for agent in self.possible_agents:
             state = self._states[agent]
@@ -150,7 +165,8 @@ class HeteroQuadEnv(ParallelEnv):
             state.vx = result.vx
             state.vy = result.vy
             state.yaw = float(np.arctan2(result.vy, result.vx)) if result.moved else state.yaw
-            arrived[agent] = result.arrived
+            # arrived only meaningful for movement actions
+            arrived[agent] = result.arrived if action_type in (ActionType.SCOUT, ActionType.MOVE_TO) else False
 
             moving = action_type in (ActionType.SCOUT, ActionType.MOVE_TO) and result.moved
             if self.battery_drain:
@@ -166,8 +182,11 @@ class HeteroQuadEnv(ParallelEnv):
 
             state.battery = float(np.clip(state.battery, 0.0, 1.0))
 
-        new_reveals = self.tasks.update_reveals({a: (s.x, s.y) for a, s in self._states.items()})
-        new_interactions = self.tasks.try_interactions(action_types, self._states, self.capabilities)
+        new_reveals_by_agent = self.tasks.update_reveals({a: (s.x, s.y) for a, s in self._states.items()})
+        new_interactions, new_handoffs = self.tasks.try_interactions(action_types, self._states, self.capabilities)
+
+        # Approach shaping distances
+        curr_nearest_dist = self._compute_nearest_target_dists()
 
         completion = self.tasks.all_interacted()
         battery_failure = any(self._states[a].battery <= 0.0 for a in self.possible_agents)
@@ -188,11 +207,22 @@ class HeteroQuadEnv(ParallelEnv):
             battery={a: self._states[a].battery for a in self.possible_agents},
             battery_death_event=death_event,
             new_interactions=new_interactions,
-            new_reveals=new_reveals,
+            new_handoffs=new_handoffs,
+            new_reveals_by_agent=new_reveals_by_agent,
             completed=completion,
+            prev_nearest_target_dist=self._prev_nearest_dist,
+            curr_nearest_target_dist=curr_nearest_dist,
         )
         rewards, breakdown = compute_rewards(ctx)
-        role_metrics = self._metrics.update(action_types, commanded, self.tasks.targets, self.capabilities)
+        self._prev_nearest_dist = curr_nearest_dist
+        role_metrics = self._metrics.update(
+            action_types,
+            self.tasks.targets,
+            self.capabilities,
+            positions={a: (self._states[a].x, self._states[a].y) for a in self.possible_agents},
+            velocities={a: (self._states[a].vx, self._states[a].vy) for a in self.possible_agents},
+            pre_step_masks=pre_step_masks,
+        )
 
         self._step_count += 1
         terminated = completion or battery_failure
@@ -205,6 +235,10 @@ class HeteroQuadEnv(ParallelEnv):
                 "reward_terms": breakdown,
                 "action_mask": self._compute_action_mask(agent),
                 "role_metrics": {
+                    "handoff_rate": role_metrics.handoff_rate,
+                    "spot_interact_given_valid": role_metrics.spot_interact_given_valid,
+                    "ghost_scout_given_unrevealed": role_metrics.ghost_scout_given_unrevealed,
+                    # Backwards-compat aliases
                     "scout_rate_ghost": role_metrics.scout_rate_ghost,
                     "interact_rate_spot": role_metrics.interact_rate_spot,
                 },
@@ -243,9 +277,35 @@ class HeteroQuadEnv(ParallelEnv):
             dtype=np.float32,
         )
         teammate_vec = np.array([mate.x, mate.y, mate.yaw, mate.battery], dtype=np.float32)
-        target_vec = self.tasks.flattened_target_obs()
-        occ = self.world.occupancy_grid(10)
-        return np.concatenate([own_vec, teammate_vec, target_vec, occ], dtype=np.float32)
+        target_vec = self.tasks.flattened_target_obs(agent_x=own.x, agent_y=own.y)
+        if self._occ_dim > 0:
+            return np.concatenate([own_vec, teammate_vec, target_vec, self.world.occupancy_grid(10)], dtype=np.float32)
+        return np.concatenate([own_vec, teammate_vec, target_vec], dtype=np.float32)
+
+    def _compute_nearest_target_dists(self) -> dict[str, float]:
+        """Compute per-agent distance to nearest 'relevant' target.
+
+        Ghost → nearest unrevealed target (scouting priority).
+        Spot  → nearest revealed-but-uninteracted target (interaction priority).
+        Falls back to nearest un-interacted target if no role-specific target exists.
+        """
+        dists: dict[str, float] = {}
+        for agent in self.possible_agents:
+            sx, sy = self._states[agent].x, self._states[agent].y
+            # Role-specific targets
+            if agent == "ghost":
+                candidates = [t for t in self.tasks.targets if not t.revealed]
+                # Fallback for ghost: any un-interacted target
+                if not candidates:
+                    candidates = [t for t in self.tasks.targets if not t.interacted]
+            else:  # spot
+                candidates = [t for t in self.tasks.targets if t.revealed and not t.interacted]
+                # No fallback for spot: don't shape it toward unrevealed targets
+            if candidates:
+                dists[agent] = min(float(np.hypot(sx - t.x, sy - t.y)) for t in candidates)
+            else:
+                dists[agent] = 0.0
+        return dists
 
     def _compute_action_mask(self, agent: str) -> np.ndarray:
         """Return length-5 mask: 1.0=valid, 0.0=invalid per action type."""
@@ -256,7 +316,7 @@ class HeteroQuadEnv(ParallelEnv):
             mask[2] = 0.0
         else:
             can_interact = any(
-                t.revealed and not t.interacted and np.hypot(state.x - t.x, state.y - t.y) <= 0.5
+                t.revealed and not t.interacted and np.hypot(state.x - t.x, state.y - t.y) <= 3.6
                 for t in self.tasks.targets
             )
             if not can_interact:

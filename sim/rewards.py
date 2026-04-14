@@ -19,30 +19,48 @@ class RewardContext:
     battery: dict[str, float]
     battery_death_event: dict[str, bool]
     new_interactions: int
-    new_reveals: int
+    new_handoffs: int
+    new_reveals_by_agent: dict[str, int]
     completed: bool
+    # Approach shaping (optional — distances to nearest relevant targets)
+    prev_nearest_target_dist: dict[str, float] | None = None
+    curr_nearest_target_dist: dict[str, float] | None = None
 
 
 def compute_reward_terms(ctx: RewardContext) -> dict[str, dict[str, float]]:
     terms = {
         agent: {
             "interaction": 0.0,
+            "handoff": 0.0,
             "reveal": 0.0,
-            "time": -0.01,
+            "time": -0.05,
             "coverage_gap": 0.0,
             "sync_coverage": 0.0,
             "low_battery": 0.0,
             "battery_death": 0.0,
             "completion": 0.0,
+            "approach": 0.0,
         }
         for agent in ctx.agents
     }
 
-    team_interaction = 10.0 * float(ctx.new_interactions)
-    team_reveal = 5.0 * float(ctx.new_reveals)
+    # Interaction reward: shared for team completion
+    team_interaction = 50.0 * float(ctx.new_interactions)
     for agent in ctx.agents:
         terms[agent]["interaction"] = team_interaction
-        terms[agent]["reveal"] = team_reveal
+
+    # Handoff bonus: Ghost reveals → Spot interacts (the intended coordination pattern)
+    # Both agents rewarded to incentivize the full Ghost-scout → Spot-interact chain.
+    team_handoff = 25.0 * float(ctx.new_handoffs)
+    for agent in ctx.agents:
+        terms[agent]["handoff"] = team_handoff
+
+    # Role-differentiated reveal reward: only Ghost earns reveal credit.
+    # With common_reward, team reward = 10.0 when Ghost reveals vs 0.0 when Spot reveals,
+    # creating a gradient that pushes Ghost to be the scout.
+    ghost_reveals = float(ctx.new_reveals_by_agent.get("ghost", 0))
+    terms["ghost"]["reveal"] = 10.0 * ghost_reveals
+    # Spot gets nothing for revealing — don't incentivize it to scout.
 
     if len(ctx.agents) == 2:
         a0, a1 = ctx.agents
@@ -59,7 +77,7 @@ def compute_reward_terms(ctx: RewardContext) -> dict[str, dict[str, float]]:
         waypoint_sep = float(np.linalg.norm(wp0 - wp1))
         if both_arrived and waypoint_sep > 2.0:
             for agent in ctx.agents:
-                terms[agent]["sync_coverage"] = 1.0
+                terms[agent]["sync_coverage"] = 0.0  # disabled: per-step reward was exploited
 
     for agent in ctx.agents:
         if ctx.battery[agent] < 0.2 and ctx.action_types[agent] != ActionType.RECHARGE:
@@ -69,7 +87,16 @@ def compute_reward_terms(ctx: RewardContext) -> dict[str, dict[str, float]]:
 
     if ctx.completed:
         for agent in ctx.agents:
-            terms[agent]["completion"] = 100.0
+            terms[agent]["completion"] = 200.0
+
+    # Potential-based approach shaping: reward for reducing distance to nearest relevant target
+    if ctx.prev_nearest_target_dist is not None and ctx.curr_nearest_target_dist is not None:
+        for agent in ctx.agents:
+            prev_d = ctx.prev_nearest_target_dist.get(agent, 0.0)
+            curr_d = ctx.curr_nearest_target_dist.get(agent, 0.0)
+            # Positive when getting closer, negative when moving away (capped)
+            delta = prev_d - curr_d
+            terms[agent]["approach"] = float(np.clip(delta * 0.5, -0.5, 0.5))
 
     return terms
 

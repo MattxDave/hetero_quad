@@ -62,14 +62,15 @@ class World:
         self.charge_point = charge_point
 
     @classmethod
-    def from_config(cls, cfg: dict, use_rough_zones: bool = True) -> "World":
+    def from_config(cls, cfg: dict, use_rough_zones: bool = True, use_walls: bool = True, dt: float = 0.1) -> "World":
         bounds = cfg.get("bounds", [20.0, 20.0])
         width, height = float(bounds[0]), float(bounds[1])
-        obstacles = [Rect(*map(float, rect)) for rect in cfg.get("walls", [])]
+        walls = cfg.get("walls", []) if use_walls else []
+        obstacles = [Rect(*map(float, rect)) for rect in walls]
         rough = cfg.get("rough_zones", []) if use_rough_zones else []
         rough_zones = [Rect(*map(float, rect)) for rect in rough]
         cp = cfg.get("charge_point", [1.0, 1.0])
-        return cls(width=width, height=height, obstacles=obstacles, rough_zones=rough_zones, charge_point=(float(cp[0]), float(cp[1])))
+        return cls(width=width, height=height, obstacles=obstacles, rough_zones=rough_zones, dt=dt, charge_point=(float(cp[0]), float(cp[1])))
 
     def point_in_rough(self, x: float, y: float) -> bool:
         return any(zone.contains(x, y) for zone in self.rough_zones)

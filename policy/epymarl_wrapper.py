@@ -4,12 +4,14 @@ Converts the PettingZoo ParallelEnv with Dict(type=Discrete(5), target=Box(2))
 action space into a single Discrete action space via grid discretization,
 as required by EPyMARL's learners and action selectors.
 
-Action encoding:
-    action_id = type_idx * grid_cells + grid_idx
-    where grid_idx = row * grid_size + col
-    grid_cells = grid_size^2
+Action encoding (compact — only movement actions carry a grid target):
+    SCOUT  (type 0): action_ids 0 .. grid_cells-1        (grid target)
+    MOVE_TO(type 1): action_ids grid_cells .. 2*grid_cells-1 (grid target)
+    INTERACT(type 2): action_id  2*grid_cells              (point action)
+    RECHARGE(type 3): action_id  2*grid_cells + 1          (point action)
+    HOLD    (type 4): action_id  2*grid_cells + 2          (point action)
 
-Total actions = 5 * grid_size^2  (default grid_size=8 → 320 actions)
+Total actions = 2 * grid_size^2 + 3  (default grid_size=8 → 131 actions)
 """
 from __future__ import annotations
 
@@ -56,17 +58,25 @@ class HeteroQuadMAEnv:
             [(x, y) for y in ys for x in xs], dtype=np.float32
         )  # shape (grid_cells, 2)
 
-        self.n_actions = 5 * self._grid_cells
+        # Compact action space: 2*grid_cells (SCOUT + MOVE_TO) + 3 (INTERACT, RECHARGE, HOLD)
+        self.n_actions = 2 * self._grid_cells + 3
         self._obs: list[np.ndarray] | None = None
         self._info: dict[str, Any] = {}
 
     # ----- action conversion -----
 
     def _decode_action(self, action_id: int) -> dict[str, Any]:
-        type_idx = action_id // self._grid_cells
-        grid_idx = action_id % self._grid_cells
-        target = self._grid_centres[grid_idx]
-        return {"type": int(type_idx), "target": target}
+        gc = self._grid_cells
+        if action_id < gc:
+            # SCOUT with grid target
+            return {"type": 0, "target": self._grid_centres[action_id]}
+        elif action_id < 2 * gc:
+            # MOVE_TO with grid target
+            return {"type": 1, "target": self._grid_centres[action_id - gc]}
+        else:
+            # Point actions: INTERACT=2, RECHARGE=3, HOLD=4
+            point_idx = action_id - 2 * gc  # 0=INTERACT, 1=RECHARGE, 2=HOLD
+            return {"type": 2 + point_idx, "target": np.zeros(2, dtype=np.float32)}
 
     # ----- MultiAgentEnv interface -----
 
@@ -127,10 +137,24 @@ class HeteroQuadMAEnv:
             mask_5 = self._info[agent].get("action_mask", np.ones(5, dtype=np.float32))
         else:
             mask_5 = np.ones(5, dtype=np.float32)
-        # Expand 5-element type mask across all grid cells
-        avail = []
-        for t in range(5):
-            avail.extend([int(mask_5[t])] * self._grid_cells)
+
+        # Force INTERACT when available: mask out everything else.
+        # In Stage 1 (no battery drain) there is never a reason to delay
+        # interaction, and this removes the exploration bottleneck where
+        # a single INTERACT action competes with 64 MOVE_TO logits.
+        if mask_5[2]:
+            mask_5 = np.array([0, 0, 1, 0, 0], dtype=np.float32)
+
+        gc = self._grid_cells
+        avail: list[int] = []
+        # SCOUT actions (grid_cells entries)
+        avail.extend([int(mask_5[0])] * gc)
+        # MOVE_TO actions (grid_cells entries)
+        avail.extend([int(mask_5[1])] * gc)
+        # Point actions: INTERACT, RECHARGE, HOLD (1 entry each)
+        avail.append(int(mask_5[2]))  # INTERACT
+        avail.append(int(mask_5[3]))  # RECHARGE
+        avail.append(int(mask_5[4]))  # HOLD
         return avail
 
     def get_total_actions(self) -> int:
